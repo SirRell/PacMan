@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameMenu : MonoBehaviour
 {
-    public static bool isOnePlayerGame = true; // need to change back to true
+    public static bool isOnePlayerGame = true;
 
 
     public Text playerText1;

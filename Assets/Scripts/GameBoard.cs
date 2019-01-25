@@ -11,14 +11,12 @@ public class GameBoard : MonoBehaviour
 
     bool didStartDeath = false;
 
-    // bool didIncrementLevel = false; //no idea where this is being used
-
     bool didStartConsumed = false;
 
     public int totalPellets = 0;
     public static int playerOneScore, playerTwoScore, highScore;
-    public static int playerOneLevel = 1, playerTwoLevel = 1; //change back to 1
-    public static int livesPlayerOne = 3, livesPlayerTwo = 0; //change player2 to 0
+    public static int playerOneLevel = 1, playerTwoLevel = 1;
+    public static int livesPlayerOne = 3, livesPlayerTwo = 0;
     public int playerOnePelletsConsumed = 0, playerTwoPelletsConsumed = 0;
     public static bool hasPlayedIntro = false;
 
@@ -93,7 +91,7 @@ public class GameBoard : MonoBehaviour
             ghost.transform.GetComponent<SpriteRenderer>().enabled = false;
         }
 
-        StartCoroutine(ProcessDeathAnimation(2f));//1.9f
+        StartCoroutine(ProcessDeathAnimation(2f));
     }
 
     IEnumerator ProcessDeathAnimation(float delay)
@@ -176,7 +174,7 @@ public class GameBoard : MonoBehaviour
 
             yield return new WaitForSeconds(delay);
 
-            StartCoroutine(ProcessRestartShowObjects(2)); //52:45
+            StartCoroutine(ProcessRestartShowObjects(2));
         }
         else //Not a game over for anybody
         {
@@ -202,7 +200,7 @@ public class GameBoard : MonoBehaviour
             }
 
 
-            UpdateUI(); //Update player title
+            UpdateUI();
             UpdateLevelUI();
             playerText.enabled = true;
             readyText.enabled = true;
@@ -584,7 +582,7 @@ public class GameBoard : MonoBehaviour
 
         yield return new WaitForSeconds(delay);
 
-        StartCoroutine(ProcessRestartShowObjects(1)); //40:37
+        StartCoroutine(ProcessRestartShowObjects(1));
     }
 
     IEnumerator ProcessRestartShowObjects(float delay)
@@ -681,7 +679,7 @@ public class GameBoard : MonoBehaviour
             //hide consumed ghost
             consumedGhost.transform.GetComponent<SpriteRenderer>().enabled = false;
 
-            //stop background musci
+            //stop background music
             audio.Stop();
 
             Vector2 pos = consumedGhost.transform.position;

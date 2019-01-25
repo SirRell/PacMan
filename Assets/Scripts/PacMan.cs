@@ -10,7 +10,6 @@ public class PacMan : MonoBehaviour
 
     public float speed = 6.0f;
 
-    //public Sprite idleSprite;
     public bool canMove = true;
 
     bool playChomp1 = false;
@@ -67,7 +66,6 @@ public class PacMan : MonoBehaviour
         orientation = Vector2.left;
         nextDirection = Vector2.left;
 
-        //anim.SetBool("Dying", false);
         anim.enabled = true;
         ChangePosition(direction);
         UpdateOrientaion();
@@ -178,13 +176,10 @@ public class PacMan : MonoBehaviour
     {
         if (direction == Vector2.zero)
         {
-            //GetComponent<Animator>().enabled = false;
-            //GetComponent<SpriteRenderer>().sprite = idleSprite;
             anim.SetBool("Idle", true);
         }
         else
         {
-            //GetComponent<Animator>().enabled = true;
             anim.SetBool("Idle", false);
         }
     }
