@@ -15,8 +15,8 @@ public class GameBoard : MonoBehaviour
 
     public int totalPellets = 0;
     public static int playerOneScore, playerTwoScore, highScore;
-    public static int playerOneLevel = 1, playerTwoLevel = 1;
-    public static int livesPlayerOne = 3, livesPlayerTwo = 0;
+    public static int playerOneLevel = 1, playerTwoLevel = 1; 
+    public static int livesPlayerOne = 3, livesPlayerTwo = 0; 
     public int playerOnePelletsConsumed = 0, playerTwoPelletsConsumed = 0;
     public static bool hasPlayedIntro = false;
 
@@ -120,7 +120,6 @@ public class GameBoard : MonoBehaviour
 
         if (livesPlayerOne == 0 && livesPlayerTwo == 0) //If total Game over...
         {
-            Debug.Log("Complete game over");
             readyText.text = "GAME OVER";
             readyText.color = Color.red;
             readyText.enabled = true;
@@ -140,8 +139,6 @@ public class GameBoard : MonoBehaviour
             {
                 playerText.text = "PLAYER 2";
             }
-
-            Debug.Log("Game over for " + playerText.text);
 
             playerText.enabled = true;
             readyText.text = "GAME OVER";
@@ -178,8 +175,6 @@ public class GameBoard : MonoBehaviour
         }
         else //Not a game over for anybody
         {
-            Debug.Log("Restarting game. " + playerText.text + "loses a life. No game over");
-
             pacMan.GetComponent<SpriteRenderer>().enabled = false;
 
             audio.Stop();
@@ -200,7 +195,7 @@ public class GameBoard : MonoBehaviour
             }
 
 
-            UpdateUI();
+            UpdateUI(); //Update player title
             UpdateLevelUI();
             playerText.enabled = true;
             readyText.enabled = true;
@@ -326,7 +321,6 @@ public class GameBoard : MonoBehaviour
     void SpawnBonusItemForLevel(int level)
     {
         GameObject bonusitem = null;
-        print("Spawning bonus item");
         switch (level)
         {
             case 1:
@@ -535,10 +529,10 @@ public class GameBoard : MonoBehaviour
             ghost.GetComponent<SpriteRenderer>().enabled = false;
         }
 
-        //blink board
+        //Blink board
         GameObject.Find("Maze").GetComponent<Animator>().SetBool("shouldBlink", true);
         yield return new WaitForSeconds(delay);
-        //restart game at next level
+        //Restart game at next level
         GameObject.Find("Maze").GetComponent<Animator>().SetBool("shouldBlink", false);
         StartNextLevel();
     }
@@ -664,22 +658,22 @@ public class GameBoard : MonoBehaviour
         {
             didStartConsumed = true;
 
-            // pause all the ghosts
+            // Pause all the ghosts
             foreach(GameObject ghost in allGhosts)
             {
                 ghost.transform.GetComponent<Ghost>().canMove = false;
             }
 
-            //pause pacman
+            // Pause pacman
             pacMan.GetComponent<PacMan>().canMove = false;
 
-            //hide pacman
+            // Hide pacman
             pacMan.GetComponent<SpriteRenderer>().enabled = false;
 
-            //hide consumed ghost
+            // Hide consumed ghost
             consumedGhost.transform.GetComponent<SpriteRenderer>().enabled = false;
 
-            //stop background music
+            // Stop background musci
             audio.Stop();
 
             Vector2 pos = consumedGhost.transform.position;
@@ -692,10 +686,10 @@ public class GameBoard : MonoBehaviour
 
             consumedGhostScoreText.GetComponent<Text>().enabled = true;
 
-            //Play the consumed sound
+            // Play the consumed sound
             audio.PlayOneShot(consumedGhostAudioClip);
 
-            //wait for the audio clip to finish
+            // Wait for the audio clip to finish
             StartCoroutine(ProcessConsumedAfter(0.75f, consumedGhost));
             UpdateUI();
         }

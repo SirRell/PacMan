@@ -361,6 +361,8 @@ public class PacMan : MonoBehaviour
         {
             if(currentNode.validDirections[i] == d)
             {
+                if (currentNode.GetComponent<Tile>().isEntranceToGhostHouse && d == Vector2.down)
+                    return moveToNode;
                 moveToNode = currentNode.neighborsList[i];
                 break;
             }
