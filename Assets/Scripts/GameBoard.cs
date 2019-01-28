@@ -14,7 +14,8 @@ public class GameBoard : MonoBehaviour
     bool didStartConsumed = false;
 
     public int totalPellets = 0;
-    public static int playerOneScore, playerTwoScore, highScore;
+    public static int playerOneScore, playerTwoScore;
+    public int highScore;
     public static int playerOneLevel = 1, playerTwoLevel = 1; 
     public static int livesPlayerOne = 3, livesPlayerTwo = 0; 
     public int playerOnePelletsConsumed = 0, playerTwoPelletsConsumed = 0;
@@ -222,6 +223,9 @@ public class GameBoard : MonoBehaviour
         allGhosts = GameObject.FindGameObjectsWithTag("Ghost");
         mainCamera = Camera.main;
 
+        highScore = PlayerPrefs.GetInt("HighScore", 0);
+        highScoreScore.text = highScore.ToString();
+
         allPellets = FindObjectsOfType(typeof(GameObject));
 
         foreach (GameObject o in allPellets)
@@ -401,11 +405,19 @@ public class GameBoard : MonoBehaviour
         playerOneScoreText.text = playerOneScore.ToString();
         playerTwoScoreText.text = playerTwoScore.ToString();
 
+
         if (isPlayerOneUp)
         {
             playerText.text = "PLAYER 1";
             levelText.text = playerOneLevel.ToString();
             currentLevel = playerOneLevel;
+
+            if(playerOneScore > highScore)
+            {
+                PlayerPrefs.SetInt("HighScore", playerOneScore);
+                highScore = playerOneScore;
+                highScoreScore.text = highScore.ToString();
+            }
 
             if (totalPellets == playerOnePelletsConsumed)
             {
@@ -417,6 +429,14 @@ public class GameBoard : MonoBehaviour
             playerText.text = "PLAYER 2";
             levelText.text = playerTwoLevel.ToString();
             currentLevel = playerTwoLevel;
+
+            if (playerTwoScore > highScore)
+            {
+                PlayerPrefs.SetInt("HighScore", playerTwoScore);
+                highScore = playerTwoScore;
+
+                highScoreScore.text = highScore.ToString();
+            }
 
             if (totalPellets == playerTwoPelletsConsumed)
             {

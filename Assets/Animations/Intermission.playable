@@ -2958,8 +2958,6 @@ MonoBehaviour:
   - {fileID: 114606832210574906}
   - {fileID: 114155124532016374}
   - {fileID: 114867033884141776}
-  - {fileID: 0}
-  - {fileID: 0}
   m_Clips: []
   m_Version: 2
 --- !u!114 &114203726882175184
